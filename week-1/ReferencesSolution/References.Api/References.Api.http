@@ -7,3 +7,14 @@ Accept: application/json
 
 GET {{References.Api_HostAddress}}/links
 Accept: application/json
+
+###
+
+POST {{References.Api_HostAddress}}/links 
+Accept: application/json 
+Content-Type: application/json
+ 
+{
+    "href": "https://progressive.com",
+    "description": "Progressive Main Site"
+}

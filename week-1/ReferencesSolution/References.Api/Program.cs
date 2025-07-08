@@ -1,23 +1,39 @@
 
-            var builder = WebApplication.CreateBuilder(args);
+using Marten;
 
-            // Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+var connectionString = builder.Configuration.GetConnectionString("links")
+    ?? throw new Exception("No Connection String"); ;
+// Add services to the container. 
+builder.Services.AddMarten(config =>
+{
+    config.Connection(connectionString);
+}).UseLightweightSessions();
 
-            var app = builder.Build();
+// Add services to the container.
+builder.Services.AddMarten(config =>
+{
+    config.Connection(connectionString);
+}).UseLightweightSessions();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
-            app.UseAuthorization();
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseAuthorization();
 
 
-            app.MapControllers();
+app.MapControllers();  // Reflection the ability to have code that looks at itself.
 
-            app.Run();
+app.Run();
+
+public partial class Program;
