@@ -5,3 +5,6 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
       POSTGRES_DB: links 
+    ports:
+      - 5432:5432
+
