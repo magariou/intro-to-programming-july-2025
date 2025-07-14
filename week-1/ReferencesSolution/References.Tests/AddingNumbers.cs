@@ -15,6 +15,6 @@ public class AddingNumbers
 
         // Then
         // Answer should be 30
-        Assert.Equal(31, answer);
+        Assert.Equal(30, answer);
     }
 }
