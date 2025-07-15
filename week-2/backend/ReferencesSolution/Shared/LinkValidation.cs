@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared
+﻿namespace Shared
 {
-    internal class LinkValidation
-    {
-    }
+    public record LinkValidationRequest(string Href);
+
+    public enum LinkStatus { Good, Blocked, Pending };
+    public record LinkValidationResponse(LinkStatus Status);
+
 }
