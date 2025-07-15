@@ -5,6 +5,7 @@ import { CounterStore } from '../../shared/counter-store';
   selector: 'app-counter-prefs',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
+  providers: [],
   template: `
     <p>You are counting by:</p>
     <div class="join">

@@ -11,6 +11,7 @@ import { CounterStore } from '../../shared/counter-store';
   selector: 'app-demos-counter',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
+  providers: [],
   template: `
     <div>
       <button
