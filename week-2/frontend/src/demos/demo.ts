@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { CounterStore } from './services/counter-store';
+import { CounterStore } from '../shared/counter-store';
 
 @Component({
   selector: 'app-demos',
