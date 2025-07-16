@@ -10,13 +10,35 @@ var connectionString = builder.Configuration.GetConnectionString("links")
 
 // Add services to the container. 
 
+builder.Services.AddCors(config =>
+{
+    // NOTE: This isn't something you come up with, talk to your team, security folks, etc.
+    config.AddDefaultPolicy(pol =>
+    {
+        pol.AllowAnyOrigin();
+        pol.AllowAnyMethod();
+        pol.AllowAnyHeader();
+    });
+});
 
-//builder.Services.AddMarten(config =>
-//{
-//    config.Connection(connectionString);
-//}).UseLightweightSessions(); // there will be an IDocumentSession available to use in your controllers.
+builder.Services.AddMarten(config =>
+{
+    config.Connection(connectionString);
+}).UseLightweightSessions(); // there will be an IDocumentSession available to use in your controllers.
 
-//builder.Services.AddScoped<IValidateLinksWithSecurity, FakeLinkValidator>();
+
+
+var proxyApiUrl = builder.Configuration.GetConnectionString("proxyApi") ?? throw new Exception("Need an API Url configured");
+builder.Services.AddHttpClient<RealLinkValidator>(config =>
+{
+    config.BaseAddress = new Uri(proxyApiUrl);
+});
+
+builder.Services.AddScoped<IValidateLinksWithSecurity>(sp =>
+{
+    return sp.GetRequiredService<RealLinkValidator>();
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -34,6 +56,7 @@ app.UseAuthorization();
 
 app.MapControllers();  // Reflection the ability to have code that looks at itself.
 
+app.UseCors();
 app.Run();
 
 

@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿
+using Shared;
 namespace References.Api.External;
 
 public class FakeLinkValidator : IValidateLinksWithSecurity
@@ -14,5 +15,3 @@ public class FakeLinkValidator : IValidateLinksWithSecurity
         }
     }
 }
-
-
