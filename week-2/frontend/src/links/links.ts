@@ -1,11 +1,11 @@
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
-import { Add } from './components/add';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { List } from './components/list';
+import { Add } from './components/add';
 
 @Component({
   selector: 'app-links',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Add, List],
+  imports: [List, Add],
   template: `
     <div class="flex flex-row gap-4">
       <app-links-list />
@@ -14,11 +14,4 @@ import { List } from './components/list';
   `,
   styles: ``,
 })
-export class Links {
-  links = resource({
-    loader: () =>
-      fetch('http://api.realsever-but-not-really.com/links').then((r) =>
-        r.json(),
-      ),
-  });
-}
+export class Links {}

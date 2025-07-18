@@ -1,16 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { LinksStore } from '../services/links-sotre';
+import { LinksStore } from '../services/links-store';
 
 @Component({
   selector: 'app-links-list',
-
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   imports: [],
-
   template: `
-    <p>List of Links Will Go Here iS tHIS THING ON!1/1</p>
-
     <div
       class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
     >
@@ -56,7 +51,6 @@ import { LinksStore } from '../services/links-sotre';
       </table>
     </div>
   `,
-
   styles: ``,
 })
 export class List {
